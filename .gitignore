@@ -1,0 +1,47 @@
+# Autodesk Civil 3D / AutoCAD temporary & backup files
+*.bak
+*.dwl
+*.dwl2
+*.sv$
+*.ac$
+*.err
+plot.log
+
+# Dynamo backups
+backup/
+*.dyn.backup
+*.dyf.backup
+
+# Visual Studio / .NET / C# Add-ins
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+packages/
+*.nupkg
+*.snupkg
+*.dll
+*.pdb
+*.exe
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.pytest_cache/
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
