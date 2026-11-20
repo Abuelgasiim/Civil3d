@@ -37,7 +37,15 @@
       <HintPath>$(AutoCadInstallDir)\AdWindows.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="AecBaseMgd">
+    <Reference Include="AecBaseMgd" Condition="Exists('$(AutoCadInstallDir)\ACA\AecBaseMgd.dll')">
+      <HintPath>$(AutoCadInstallDir)\ACA\AecBaseMgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AecBaseMgd" Condition="!Exists('$(AutoCadInstallDir)\ACA\AecBaseMgd.dll') And Exists('$(Civil3dInstallDir)\AecBaseMgd.dll')">
+      <HintPath>$(Civil3dInstallDir)\AecBaseMgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AecBaseMgd" Condition="!Exists('$(AutoCadInstallDir)\ACA\AecBaseMgd.dll') And !Exists('$(Civil3dInstallDir)\AecBaseMgd.dll')">
       <HintPath>$(AutoCadInstallDir)\AecBaseMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>

@@ -27,7 +27,7 @@ public sealed class StandardsAndAuditTests
         Assert.Equal(84, row140.MinSagK);
         Assert.Equal(0.34, row140.MaxRunoffSlopePercent);
 
-        Assert.True(aashto.SpeedTable.Any(r => r.DesignSpeedKph == 100));
+        Assert.Contains(aashto.SpeedTable, r => r.DesignSpeedKph == 100);
     }
 
     [Fact]

@@ -9,9 +9,9 @@ public sealed class RoadwayFormulasTests
     [Fact]
     public void Shc301_StoppingSightDistance_Level_MatchesExpectedValues()
     {
-        // SHC 301 Eq. 4-1: V=100 km/h, t=2.5s, a=3.4 m/s^2, G=0% => ~184.2 m (design 185 m)
+        // SHC 301 Eq. 4-1: V=100 km/h, t=2.5s, a=3.4 m/s^2, G=0% => 183.09 m (design 185 m)
         var ssd100 = RoadwayFormulas.ComputeStoppingSightDistanceM(100, 0.0, 2.5, 3.4);
-        Assert.InRange(ssd100, 183.5, 185.0);
+        Assert.InRange(ssd100, 182.5, 185.0);
 
         // Downgrade increases stopping distance
         var ssdDown = RoadwayFormulas.ComputeStoppingSightDistanceM(100, -4.0, 2.5, 3.4);

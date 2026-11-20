@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,6 +14,7 @@ using RoadwayDesignChecker.Core.Models;
 using WpfBrush = System.Windows.Media.Brush;
 using WpfColor = System.Windows.Media.Color;
 using WpfMessageBox = System.Windows.MessageBox;
+using WpfVisibility = System.Windows.Visibility;
 
 namespace RoadwayDesignChecker.Civil3D.UI;
 
@@ -246,7 +248,7 @@ public partial class CheckerPaletteView : System.Windows.Controls.UserControl
         if (_currentReport == null)
         {
             FindingsList.ItemsSource = null;
-            CoachDrawer.Visibility = Visibility.Collapsed;
+            CoachDrawer.Visibility = WpfVisibility.Collapsed;
             return;
         }
 
@@ -272,19 +274,19 @@ public partial class CheckerPaletteView : System.Windows.Controls.UserControl
         if (filtered.Count > 0)
             FindingsList.SelectedIndex = 0;
         else
-            CoachDrawer.Visibility = Visibility.Collapsed;
+            CoachDrawer.Visibility = WpfVisibility.Collapsed;
     }
 
     private void OnFindingSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (FindingsList.SelectedItem is not FindingCardVm vm)
         {
-            CoachDrawer.Visibility = Visibility.Collapsed;
+            CoachDrawer.Visibility = WpfVisibility.Collapsed;
             return;
         }
 
         var r = vm.Result;
-        CoachDrawer.Visibility = Visibility.Visible;
+        CoachDrawer.Visibility = WpfVisibility.Visible;
         TxtCoachHeadline.Text = r.Headline;
         BarCompliance.Value = r.CompliancePercent;
         BarCompliance.Foreground = vm.SeverityBrush;
