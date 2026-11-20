@@ -1,6 +1,6 @@
-# Roadway Design Checker — Civil 3D 2025 / 2026 Plugin (.NET 8)
+# Roadway Design Checker — Civil 3D 2025 / 2026 / 2027 Plugin (.NET 10)
 
-A native **.NET 8** Autodesk Civil 3D plugin that audits roadway **Alignments** and **Profiles** against the **Saudi Highway Code (`SHC 301 – Highway Geometric Design`)**, **AASHTO Green Book (2018, Metric)**, Autodesk Civil 3D **Design Criteria XML** files, and custom **JSON rule overrides** — presented in a human-readable dockable WPF palette with one-click **Show on Drawing** zoom.
+A native **.NET 10** Autodesk Civil 3D plugin that audits roadway **Alignments** and **Profiles** against the **Saudi Highway Code (`SHC 301 – Highway Geometric Design`)**, **AASHTO Green Book (2018, Metric)**, Autodesk Civil 3D **Design Criteria XML** files, and custom **JSON rule overrides** — presented in a human-readable dockable WPF palette with one-click **Show on Drawing** zoom.
 
 ---
 
@@ -38,21 +38,22 @@ A native **.NET 8** Autodesk Civil 3D plugin that audits roadway **Alignments** 
 addins/RoadwayDesignChecker/
 ├── RoadwayDesignChecker.sln
 ├── Directory.Build.props
+├── install-civil3d-plugin.ps1             # One-command build, test, and install script
 ├── src/
-│   ├── RoadwayDesignChecker.Core/         # Pure .NET 8 engineering engine & SHC 301 / AASHTO JSON tables
-│   └── RoadwayDesignChecker.Civil3D/      # Civil 3D 2025/2026 API adapter, Ribbon, Commands & WPF PaletteSet
+│   ├── RoadwayDesignChecker.Core/         # Pure .NET 10 engineering engine & SHC 301 / AASHTO JSON tables
+│   └── RoadwayDesignChecker.Civil3D/      # Civil 3D 2025/2026/2027 API adapter, Ribbon, Commands & WPF PaletteSet
 └── tests/
     └── RoadwayDesignChecker.Core.Tests/   # xUnit tests for formulas, SHC 301 tables, XML parser & audit engine
 ```
 
 ---
 
-## Build & Link with Civil 3D 2025 / 2026 (Windows)
+## Build & Link with Civil 3D 2025 / 2026 / 2027 (Windows)
 
 ### Prerequisites
 - Windows 10/11 (x64)
-- **.NET 8 SDK** (`dotnet --version` >= `8.0`)
-- **Autodesk Civil 3D 2025** or **Civil 3D 2026**
+- **.NET 10 SDK** (`dotnet --version` >= `10.0`)
+- **Autodesk Civil 3D 2027**, or **Civil 3D 2025.2+ / 2026.2+** (with Autodesk's .NET 10 update installed)
 
 ### Quick Install (One Command — Recommended)
 Close Civil 3D, open **PowerShell** inside `addins\RoadwayDesignChecker`, and run:
@@ -61,7 +62,7 @@ Close Civil 3D, open **PowerShell** inside `addins\RoadwayDesignChecker`, and ru
 powershell -ExecutionPolicy Bypass -File .\install-civil3d-plugin.ps1
 ```
 
-This auto-detects Civil 3D 2025 or 2026, runs the SHC 301 unit tests, compiles the `.NET 8` plugin, and installs `RoadwayDesignChecker.bundle` into `%APPDATA%\Autodesk\ApplicationPlugins\` (no Administrator prompt needed).
+This auto-detects Civil 3D 2027, 2026, or 2025, runs the SHC 301 unit tests, compiles the `.NET 10` plugin, and installs `RoadwayDesignChecker.bundle` into `%APPDATA%\Autodesk\ApplicationPlugins\` (no Administrator prompt needed).
 
 ---
 
@@ -74,11 +75,11 @@ From PowerShell inside `addins/RoadwayDesignChecker`:
 # Run pure engineering unit tests
 dotnet test tests/RoadwayDesignChecker.Core.Tests/RoadwayDesignChecker.Core.Tests.csproj
 
-# Build for Civil 3D 2025 (default)
+# Build for Civil 3D 2026 (default)
 dotnet build src/RoadwayDesignChecker.Civil3D/RoadwayDesignChecker.Civil3D.csproj -c Release -p:Platform=x64
 
-# Or build for Civil 3D 2026
-dotnet build src/RoadwayDesignChecker.Civil3D/RoadwayDesignChecker.Civil3D.csproj -c Release -p:Platform=x64 -p:Civil3dYear=2026
+# Or specify Civil 3D 2027 or 2025 explicitly
+dotnet build src/RoadwayDesignChecker.Civil3D/RoadwayDesignChecker.Civil3D.csproj -c Release -p:Platform=x64 -p:Civil3dYear=2027
 ```
 
 Building automatically copies `RoadwayDesignChecker.Civil3D.dll`, `RoadwayDesignChecker.Core.dll`, and `Standards/*.json` into `plugins/RoadwayDesignChecker.bundle/Contents/`.
@@ -87,13 +88,13 @@ Building automatically copies `RoadwayDesignChecker.Civil3D.dll`, `RoadwayDesign
 Copy the entire `plugins/RoadwayDesignChecker.bundle` folder into Autodesk's ApplicationPlugins directory:
 
 ```text
-%ProgramData%\Autodesk\ApplicationPlugins\RoadwayDesignChecker.bundle
+%APPDATA%\Autodesk\ApplicationPlugins\RoadwayDesignChecker.bundle
 ```
 
-Restart Civil 3D 2025 or 2026. The **Roadway QA** panel will appear on the **Analyze** Ribbon tab, and `CHECKROADWAY` will be available immediately on the command line.
+Restart Civil 3D. The **Roadway QA** panel will appear on the **Analyze** Ribbon tab, and `CHECKROADWAY` will be available immediately on the command line.
 
 ### 3. Option B — Manual Load via `NETLOAD` (For Testing)
-1. Open Civil 3D 2025 or 2026.
+1. Open Civil 3D.
 2. Type `NETLOAD` and press Enter.
-3. Browse to `addins\RoadwayDesignChecker\src\RoadwayDesignChecker.Civil3D\bin\x64\Release\net8.0-windows\RoadwayDesignChecker.Civil3D.dll`.
+3. Browse to `addins\RoadwayDesignChecker\src\RoadwayDesignChecker.Civil3D\bin\x64\Release\net10.0-windows\RoadwayDesignChecker.Civil3D.dll`.
 4. Run `CHECKROADWAY` on the command line (or click **Analyze → Roadway QA → Roadway Checker**).

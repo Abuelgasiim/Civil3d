@@ -5,20 +5,20 @@
   ProductType="Application"
   Name="Roadway Design Checker (SHC 301 &amp; AASHTO)"
   AppVersion="1.0.0"
-  Description="Human-readable roadway geometric design checker for Civil 3D 2025/2026 supporting Saudi Highway Code SHC 301, AASHTO 2018, Civil 3D Design Criteria XML, and JSON overrides."
+  Description="Human-readable roadway geometric design checker for Civil 3D 2025/2026/2027 (.NET 10) supporting Saudi Highway Code SHC 301, AASHTO 2018, Civil 3D Design Criteria XML, and JSON overrides."
   Author="Abuelgasiim"
   ProductCode="{8A41F6D1-5C0E-4B8F-9F11-3D4A92C81E01}"
   UpgradeCode="{8A41F6D1-5C0E-4B8F-9F11-3D4A92C81E02}">
 
   <CompanyDetails Name="Abuelgasiim Civil3D Tools" Url="https://github.com/Abuelgasiim/Civil3d" />
 
-  <Components Description="Civil 3D 2025 and 2026 (.NET 8 x64) Plugin">
-    <!-- R25.0 = Civil 3D 2025 (.NET 8), R25.1 = Civil 3D 2026 (.NET 8) -->
+  <Components Description="Civil 3D 2025, 2026, and 2027 (.NET 10 x64) Plugin">
+    <!-- R25.0 = Civil 3D 2025 (.NET 10 update), R25.1 = Civil 3D 2026 (.NET 10 update), R26.0 = Civil 3D 2027 (.NET 10) -->
     <RuntimeRequirements
       OS="Win64"
       Platform="Civil3D"
       SeriesMin="R25.0"
-      SeriesMax="R25.1" />
+      SeriesMax="R26.0" />
 
     <ComponentEntry
       AppName="RoadwayDesignChecker"

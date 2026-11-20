@@ -8,8 +8,8 @@
     <Product>Civil 3D Roadway Design Checker (SHC 301 &amp; AASHTO)</Product>
     <Version>1.0.0</Version>
 
-    <!-- Configure your local Civil 3D installation version (2025 or 2026) -->
-    <Civil3dYear Condition="'$(Civil3dYear)' == ''">2025</Civil3dYear>
+    <!-- Configure your local Civil 3D installation version (2025, 2026, or 2027) -->
+    <Civil3dYear Condition="'$(Civil3dYear)' == ''">2026</Civil3dYear>
     <AutoCadInstallDir Condition="'$(AutoCadInstallDir)' == ''">C:\Program Files\Autodesk\AutoCAD $(Civil3dYear)</AutoCadInstallDir>
     <Civil3dInstallDir Condition="'$(Civil3dInstallDir)' == ''">$(AutoCadInstallDir)\C3D</Civil3dInstallDir>
   </PropertyGroup>
