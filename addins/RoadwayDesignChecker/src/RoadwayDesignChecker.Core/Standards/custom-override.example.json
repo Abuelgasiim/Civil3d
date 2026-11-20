@@ -1,0 +1,16 @@
+{
+  "name": "Example Project Design Waiver (SHC 301 Override)",
+  "baseStandardId": "shc-301-metric",
+  "minDrainageGradePercent": 0.5,
+  "desirableDrainageGradePercent": 0.7,
+  "minBrokenBackTangentFreewayM": 400.0,
+  "speedOverrides": [
+    {
+      "designSpeedKph": 100,
+      "maxAllowableGradePercent": 5.5,
+      "minRadiusByEmax": {
+        "6": 440
+      }
+    }
+  ]
+}

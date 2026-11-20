@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>RoadwayDesignChecker.Core</RootNamespace>
+    <AssemblyName>RoadwayDesignChecker.Core</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Standards\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

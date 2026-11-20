@@ -21,6 +21,10 @@ Civil3d/
 
 ## Add-ins & Plugins
 
+| Tool | Source | Bundle | Description |
+| :--- | :--- | :--- | :--- |
+| **Roadway Design Checker (SHC 301 & AASHTO)** | [`addins/RoadwayDesignChecker`](addins/RoadwayDesignChecker/README.md) | [`plugins/RoadwayDesignChecker.bundle`](plugins/RoadwayDesignChecker.bundle/PackageContents.xml) | Native **.NET 8** Civil 3D 2025/2026 plugin with a human-readable dockable WPF palette that audits horizontal alignments, vertical profiles, superelevation, and sight distance against **Saudi Highway Code (SHC 301)**, **AASHTO 2018 (Metric)**, Civil 3D Criteria XML, and custom JSON overrides, with one-click **Zoom-to-Station** and HTML/CSV/JSON report export. |
+
 - `addins/` — Source code for Civil 3D .NET API (`Autodesk.Civil.ApplicationServices`, `Autodesk.AutoCAD.*`) add-ins.
 - `plugins/` — Ready-to-deploy `.bundle` folders and `PackageContents.xml` manifests.
 

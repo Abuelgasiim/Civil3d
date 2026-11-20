@@ -1,0 +1,70 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>x64</Platforms>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <RootNamespace>RoadwayDesignChecker.Civil3D</RootNamespace>
+    <AssemblyName>RoadwayDesignChecker.Civil3D</AssemblyName>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Remove="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RoadwayDesignChecker.Core\RoadwayDesignChecker.Core.csproj" />
+  </ItemGroup>
+
+  <!-- AutoCAD / Civil 3D 2025-2026 Managed API References (Never copy Autodesk DLLs to output) -->
+  <ItemGroup>
+    <Reference Include="accoremgd">
+      <HintPath>$(AutoCadInstallDir)\accoremgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="acdbmgd">
+      <HintPath>$(AutoCadInstallDir)\acdbmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="acmgd">
+      <HintPath>$(AutoCadInstallDir)\acmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AdWindows">
+      <HintPath>$(AutoCadInstallDir)\AdWindows.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AecBaseMgd">
+      <HintPath>$(AutoCadInstallDir)\AecBaseMgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AeccDbMgd">
+      <HintPath>$(Civil3dInstallDir)\AeccDbMgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Automatically stage built plugin DLLs & Standards into plugins/RoadwayDesignChecker.bundle/Contents -->
+  <Target Name="StageIntoAutodeskBundle" AfterTargets="Build" Condition="Exists('$(MSBuildProjectDirectory)\..\..\..\..\plugins\RoadwayDesignChecker.bundle')">
+    <PropertyGroup>
+      <BundleContentsDir>$(MSBuildProjectDirectory)\..\..\..\..\plugins\RoadwayDesignChecker.bundle\Contents</BundleContentsDir>
+    </PropertyGroup>
+    <MakeDir Directories="$(BundleContentsDir);$(BundleContentsDir)\Standards" />
+    <Copy SourceFiles="$(TargetDir)RoadwayDesignChecker.Civil3D.dll;$(TargetDir)RoadwayDesignChecker.Core.dll"
+          DestinationFolder="$(BundleContentsDir)"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(TargetDir)RoadwayDesignChecker.Civil3D.deps.json"
+          DestinationFolder="$(BundleContentsDir)"
+          Condition="Exists('$(TargetDir)RoadwayDesignChecker.Civil3D.deps.json')"
+          SkipUnchangedFiles="true" />
+    <ItemGroup>
+      <StandardJsonFiles Include="$(TargetDir)Standards\*.json" />
+    </ItemGroup>
+    <Copy SourceFiles="@(StandardJsonFiles)"
+          DestinationFolder="$(BundleContentsDir)\Standards"
+          SkipUnchangedFiles="true" />
+  </Target>
+</Project>
